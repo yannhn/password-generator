@@ -12,6 +12,36 @@
     <header>
       <h1>Password generator</h1>
     </header>
-    <main></main>
+    <main>
+      <section>
+        <form>
+          <label for="numberInput">Enter password length (4-256)</label>
+          <input id="numberInput" type="number" />
+          <section>
+            <label for="selectNumbers"></label>
+            <input id="selectNumbers" type="button" value="Numbers" />
+            <label for="selectUpperCase"></label>
+            <input
+              id="selectUpperCase"
+              type="button"
+              value="Upper Characters"
+            />
+            <label for="selectLowerCase"></label>
+            <input
+              id="selectLowerCase"
+              type="button"
+              value="Lower Characters"
+            />
+            <label for="selectSpecial"></label>
+            <input
+              id="selectSpecial"
+              type="button"
+              value="Special Characters"
+            />
+          </section>
+          <button type="submit">Generate Password!</button>
+        </form>
+      </section>
+    </main>
   </body>
 </html>
