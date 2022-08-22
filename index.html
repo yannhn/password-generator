@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Password generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <script src="app.js" defer></script>
   </head>
@@ -13,35 +19,62 @@
       <h1>Password generator</h1>
     </header>
     <main>
-      <section>
-        <form>
-          <label for="numberInput">Enter password length (4-256)</label>
-          <input id="numberInput" type="number" />
-          <section>
-            <label for="selectNumbers"></label>
-            <input id="selectNumbers" type="button" value="Numbers" />
-            <label for="selectUpperCase"></label>
+      <section class="selectLength">
+        <label for="numberInput">Enter password length (4-256)</label>
+        <input id="numberInput" type="number" min="4" max="256" value="4" />
+      </section>
+      <section class="selectCharacters">
+        <h2>Select which character-type should be included</h2>
+        <section class="selectCharacters-section">
+          <section class="selectCharacters-label">
+            <label for="selectNumbers">Numbers</label>
             <input
-              id="selectUpperCase"
-              type="button"
-              value="Upper Characters"
-            />
-            <label for="selectLowerCase"></label>
-            <input
-              id="selectLowerCase"
-              type="button"
-              value="Lower Characters"
-            />
-            <label for="selectSpecial"></label>
-            <input
-              id="selectSpecial"
-              type="button"
-              value="Special Characters"
+              id="selectNumbers"
+              type="checkbox"
+              value="Numbers"
+              data-js="selectNumbers"
             />
           </section>
-          <button type="submit">Generate Password!</button>
-        </form>
+          <section class="selectCharacters-label">
+            <label for="selectUpperCase">Upper Case Letters</label>
+            <input
+              id="selectUpperCase"
+              type="checkbox"
+              value="Upper Characters"
+              data-js="selectUpperCase"
+            />
+          </section>
+          <section class="selectCharacters-label">
+            <label for="selectLowerCase">Lower Case Letters</label>
+            <input
+              id="selectLowerCase"
+              type="checkbox"
+              value="Lower Characters"
+              data-js="selectLowerCase"
+            />
+          </section>
+          <section class="selectCharacters-label">
+            <label for="selectSpecial">Special Characters</label>
+            <input
+              id="selectSpecial"
+              type="checkbox"
+              value="Special Characters"
+              data-js="selectSpecial"
+            />
+          </section>
+        </section>
+      </section>
+      <section class="generate-section">
+        <button class="generate-button" data-js="generate-button">
+          Generate Password!
+        </button>
+      </section>
+      <section class="result-section">
+        <span>RESULT</span>
       </section>
     </main>
+    <footer>
+      <span>This is a random password generator</span>
+    </footer>
   </body>
 </html>
