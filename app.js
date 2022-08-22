@@ -36,29 +36,42 @@ const charactersLowerCase = charactersUpperCase.map((element) => {
 
 const specialCharacters = [".", "*", ":", ";", "/"];
 
+////////////////////////////////////
+
 //Functions to get random
-function getRandomNumber() {
+const getRandomNumber = () => {
   const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
   return randomNumber;
-}
+};
 
-function getRandomUpperCaseCharacter() {
+const getRandomUpperCaseCharacter = () => {
   const randomUpper =
     charactersUpperCase[Math.floor(Math.random() * charactersUpperCase.length)];
   return randomUpper;
-}
+};
 
-function getRandomLowerCaseCharacter() {
+const getRandomLowerCaseCharacter = () => {
   const randomLower =
     charactersLowerCase[Math.floor(Math.random() * charactersLowerCase.length)];
   return randomLower;
-}
+};
 
-function getRandomSpecialCharacter() {
+const getRandomSpecialCharacter = () => {
   const randomSpecial =
     specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
   return randomSpecial;
-}
+};
+
+console.log;
+
+const getRandomFunctions = {
+  getNumber: getRandomNumber,
+  getUpperCase: getRandomUpperCaseCharacter,
+  getLowerCase: getRandomLowerCaseCharacter,
+  getSpecial: getRandomSpecialCharacter,
+};
+
+////////////////////////////////////
 
 // DOM
 
@@ -89,5 +102,57 @@ generatePwdElement.addEventListener("click", () => {
   const checkedLowerElement = lowerCaseElement.checked;
   const checkedSpecialElement = specialElement.checked;
 
-  console.log(checkedNumbersElement);
+  resultElement.innerHTML = generateNewPassword(
+    checkedNumbersElement,
+    checkedUpperElement,
+    checkedLowerElement,
+    checkedSpecialElement,
+    pwdLengthNumber
+  );
 });
+
+/////////////////////////////////
+// Generate Password
+function generateNewPassword(
+  getNumber,
+  getUpperCase,
+  getLowerCase,
+  getSpecial,
+  pwdLengthNumber
+) {
+  // 1. create new String
+  let newPassword = "";
+  // 2. filter out checked types
+  const countCheckboxes = getNumber + getUpperCase + getLowerCase + getSpecial;
+  console.log(countCheckboxes);
+
+  const checkboxArray = [
+    { getNumber },
+    { getUpperCase },
+    { getLowerCase },
+    { getSpecial },
+  ];
+  console.log(checkboxArray);
+  const filteredCheckboxArray = checkboxArray.filter(
+    (checkbox) => Object.values(checkbox)[0]
+  );
+  console.log(filteredCheckboxArray);
+
+  if (countCheckboxes === 0) {
+    alert("Please select a checkbox");
+  }
+  // 3. loop over length call generator
+
+  for (let i = 0; i < pwdLengthNumber; i += countCheckboxes) {
+    filteredCheckboxArray.forEach((item) => {
+      const functionName = Object.keys(item)[0];
+
+      newPassword += getRandomFunctions[functionName]();
+    });
+  }
+  const finalPassword = newPassword.slice(0, pwdLengthNumber);
+  console.log(finalPassword);
+  return finalPassword;
+
+  // 4. add final pw to new string
+}
