@@ -120,11 +120,9 @@ function generateNewPassword(
   getSpecial,
   pwdLengthNumber
 ) {
-  // 1. create new String
   let newPassword = "";
-  // 2. filter out checked types
+
   const countCheckboxes = getNumber + getUpperCase + getLowerCase + getSpecial;
-  console.log(countCheckboxes);
 
   const checkboxArray = [
     { getNumber },
@@ -132,16 +130,14 @@ function generateNewPassword(
     { getLowerCase },
     { getSpecial },
   ];
-  console.log(checkboxArray);
+
   const filteredCheckboxArray = checkboxArray.filter(
     (checkbox) => Object.values(checkbox)[0]
   );
-  console.log(filteredCheckboxArray);
 
   if (countCheckboxes === 0) {
     alert("Please select a checkbox");
   }
-  // 3. loop over length call generator
 
   for (let i = 0; i < pwdLengthNumber; i += countCheckboxes) {
     filteredCheckboxArray.forEach((item) => {
@@ -153,6 +149,4 @@ function generateNewPassword(
   const finalPassword = newPassword.slice(0, pwdLengthNumber);
   console.log(finalPassword);
   return finalPassword;
-
-  // 4. add final pw to new string
 }
