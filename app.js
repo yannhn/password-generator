@@ -1,8 +1,18 @@
-//DOM
+// DOM
+
+// PW length
+const pwdLengthElement = document.querySelector('[data-js="pwdLength"]');
+
+// Checkboxes
 const numbersElement = document.querySelector('[data-js="selectNumbers"]');
 const upperCaseElement = document.querySelector('[data-js="selectUpperCase"]');
 const lowerCaseElement = document.querySelector('[data-js="selectLowerCase"]');
 const specialElement = document.querySelector('[data-js="selectSpecial"]');
+
+// Result
+const resultElement = document.querySelector('[data-js="result-span"]');
+
+////////////////////////////////////
 
 numbersElement.addEventListener("click", () => {
   console.log(getRandomNumber());
@@ -20,7 +30,7 @@ specialElement.addEventListener("click", () => {
   console.log(getRandomSpecialCharacter());
 });
 
-// getCharacters
+// charactersArray
 const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const charactersUpperCase = [
@@ -58,6 +68,7 @@ const charactersLowerCase = charactersUpperCase.map((element) => {
 
 const specialCharacters = [".", "*", ":", ";", "/"];
 
+//Functions to get random
 const getRandomNumber = () => {
   const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
   return randomNumber;

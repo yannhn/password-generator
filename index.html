@@ -20,8 +20,15 @@
     </header>
     <main>
       <section class="selectLength">
-        <label for="numberInput">Enter password length (4-256)</label>
-        <input id="numberInput" type="number" min="4" max="256" value="4" />
+        <label for="passwordLength">Enter password length (4-256)</label>
+        <input
+          id="passwordLength"
+          type="number"
+          min="4"
+          max="256"
+          value="4"
+          data-js="pwdLength"
+        />
       </section>
       <section class="selectCharacters">
         <h2>Select which character-type should be included</h2>
@@ -70,7 +77,7 @@
         </button>
       </section>
       <section class="result-section">
-        <span>RESULT</span>
+        <span class="result-span" data-js="result-span">RESULT</span>
       </section>
     </main>
     <footer>
