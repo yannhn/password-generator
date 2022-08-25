@@ -34,7 +34,7 @@ const charactersLowerCase = charactersUpperCase.map((element) => {
   return element.toLowerCase();
 });
 
-const specialCharacters = [".", "*", ":", ";", "/"];
+const specialCharacters = ["$", "*", "&", "§", "/"];
 
 ////////////////////////////////////
 
@@ -62,8 +62,6 @@ const getRandomSpecialCharacter = () => {
   return randomSpecial;
 };
 
-console.log;
-
 const getRandomFunctions = {
   getNumber: getRandomNumber,
   getUpperCase: getRandomUpperCaseCharacter,
@@ -84,31 +82,52 @@ const upperCaseElement = document.querySelector('[data-js="selectUpperCase"]');
 const lowerCaseElement = document.querySelector('[data-js="selectLowerCase"]');
 const specialElement = document.querySelector('[data-js="selectSpecial"]');
 
-// Result
+// Generate Button
 const generatePwdElement = document.querySelector(
   '[data-js="generate-button"]'
 );
+
+// Result
 const resultElement = document.querySelector('[data-js="result-span"]');
+const resultSection = document.querySelector(".result-ol");
 
 ////////////////////////////////////
+// EVENT HANDLING
 
 generatePwdElement.addEventListener("click", () => {
   const pwdLength = pwdLengthElement.value;
   const pwdLengthNumber = Number(pwdLength);
-  console.log(pwdLengthNumber);
 
   const checkedNumbersElement = numbersElement.checked;
   const checkedUpperElement = upperCaseElement.checked;
   const checkedLowerElement = lowerCaseElement.checked;
   const checkedSpecialElement = specialElement.checked;
 
-  resultElement.innerHTML = generateNewPassword(
-    checkedNumbersElement,
-    checkedUpperElement,
-    checkedLowerElement,
-    checkedSpecialElement,
-    pwdLengthNumber
-  );
+  const tempArray = [];
+
+  if (pwdLengthNumber < 4 || pwdLengthNumber > 256) {
+    alert("Please check your number");
+  } else {
+    for (let i = 1; i <= 3; i++) {
+      const pwdForArray = generateNewPassword(
+        checkedNumbersElement,
+        checkedUpperElement,
+        checkedLowerElement,
+        checkedSpecialElement,
+        pwdLengthNumber
+      );
+      tempArray.push(pwdForArray);
+      console.log(pwdForArray);
+      const lastSubmit = tempArray[tempArray.length - 1];
+
+      const liCreate = document.createElement("li");
+      liCreate.style.maxWidth = "80%";
+      liCreate.innerText = lastSubmit;
+      resultSection.appendChild(liCreate);
+    }
+
+    // TODO: render only newest elements
+  }
 });
 
 /////////////////////////////////
@@ -135,17 +154,19 @@ function generateNewPassword(
     (checkbox) => Object.values(checkbox)[0]
   );
 
+  // FIXME: site stops working when no checkbox is selected
+
   if (countCheckboxes === 0) {
     alert("Please select a checkbox");
+  } else if (countCheckboxes > 0) {
+    for (let i = 0; i < pwdLengthNumber; i = i + countCheckboxes) {
+      filteredCheckboxArray.forEach((item) => {
+        const functionName = Object.keys(item)[0];
+        newPassword = newPassword + getRandomFunctions[functionName]();
+      });
+    }
   }
 
-  for (let i = 0; i < pwdLengthNumber; i += countCheckboxes) {
-    filteredCheckboxArray.forEach((item) => {
-      const functionName = Object.keys(item)[0];
-
-      newPassword += getRandomFunctions[functionName]();
-    });
-  }
   const finalPassword = newPassword.slice(0, pwdLengthNumber);
   console.log(finalPassword);
   return finalPassword;
