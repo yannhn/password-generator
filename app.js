@@ -37,8 +37,8 @@ const charactersLowerCase = charactersUpperCase.map((element) => {
 const specialCharacters = ["$", "*", "&", "§", "/"];
 
 ////////////////////////////////////
-
 //Functions to get random
+
 const getRandomNumber = () => {
   const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
   return randomNumber;
@@ -70,7 +70,6 @@ const getRandomFunctions = {
 };
 
 ////////////////////////////////////
-
 // DOM
 
 // PW length
@@ -122,7 +121,7 @@ generatePwdElement.addEventListener("click", () => {
 
       const liCreate = document.createElement("li");
       liCreate.style.maxWidth = "80%";
-      liCreate.innerText = lastSubmit;
+      liCreate.textContent = lastSubmit;
       resultSection.appendChild(liCreate);
     }
 
@@ -132,6 +131,7 @@ generatePwdElement.addEventListener("click", () => {
 
 /////////////////////////////////
 // Generate Password
+
 function generateNewPassword(
   getNumber,
   getUpperCase,
